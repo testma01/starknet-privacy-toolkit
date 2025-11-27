@@ -111,7 +111,7 @@ tongo-donation-demo/
 ### Deployed Contracts
 
 #### Mainnet
-- Tongo Contract: `0x0415f2c3b16cc43856a0434ed151888a5797b6a22492ea6fd41c62dbb4df4e6c`
+- Tongo Contract: `0x72098b84989a45cc00697431dfba300f1f5d144ae916e98287418af4e548d96` (Nov 14, 2024 - compatible with SDK v1.3.0)
 - USDC Token: `0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8`
 - RPC: Configured in `src/wallet-config.ts` (uses Alchemy)
 
