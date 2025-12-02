@@ -265,6 +265,109 @@ This approach keeps the repo network-agnostic—adding a mainnet deployment is j
 
 ---
 
+## Legacy: Tongo Private Donation Demo
+
+The repository still contains the original **Tongo Cash** integration that inspired this work. It showcases how to fund encrypted Tongo accounts, send private donations, and withdraw, all from a Starknet web UI. The sections below document that flow for teams who want to operate both stacks side by side.
+
+### Feature Overview
+
+- Wallet integration with Braavos and Argent X.
+- Network support for Starknet Mainnet (USDC) and Sepolia testnet (STRK).
+- Fund → Transfer → Rollover → Withdraw operations over encrypted balances.
+- Real-time balance display, transaction logging, and key-backup helpers.
+
+### Technology Stack
+
+- **Tongo SDK v1.3.0** – zero-knowledge proof generation + encryption.
+- **Starknet.js v8.9.1** and **get-starknet v3.3.3** – wallet + chain interactions.
+- **Vite + Bun + TypeScript** – application runtime/build.
+
+### Prerequisites
+
+- Bun runtime (`curl -fsSL https://bun.sh/install | bash`).
+- Braavos or Argent X wallet extension.
+- USDC (mainnet) or STRK (testnet) for funding.
+- Optional Alchemy API keys for custom RPC endpoints.
+
+### Installation
+
+```bash
+git clone https://github.com/omarespejel/tongo-ukraine-donations.git
+cd tongo-donation-demo
+bun install
+```
+
+To run the CLI demo, copy `.env.example` to `.env` and fill in `STARKNET_MAINNET_RPC_URL`, `STARKNET_SEPOLIA_RPC_URL`, and (for CLI usage) `STARKNET_ACCOUNT_ADDRESS`/`STARKNET_PRIVATE_KEY`.
+
+### Usage
+
+#### Web Frontend
+
+```bash
+bun run dev:web
+# open http://localhost:5173
+```
+
+1. Connect Braavos or Argent X.
+2. The Tongo private key auto-generates and stores in `localStorage`.
+3. Choose network (Mainnet USDC or Sepolia STRK) and perform fund/transfer/withdraw operations.
+
+#### CLI Demo
+
+```bash
+bun run demo
+```
+
+Requires the `.env` values mentioned above.
+
+### Configuration + Contracts
+
+| Network | Tongo Contract | Token | Notes |
+| ------- | -------------- | ----- | ----- |
+| Mainnet | `0x72098b84…548d96` | USDC `0x053c9125…368a8` | Matches SDK v1.3.0 |
+| Sepolia | `0x00b4cca3…ee585` | STRK `0x04718f5a…c938d` | Uses Alchemy RPC |
+
+Edit `src/wallet-config.ts` for RPCs; the `.env` file affects CLI usage only.
+
+### How Tongo Works (recap)
+
+- **ElGamal encryption** on Stark curve; balances stored as ciphertexts `Enc[y](b, r)`.
+- **Two-balance model** (current vs pending) with rollover.
+- **Operations**: Fund (public amount), Transfer (hidden), Rollover (internal), Withdraw (public).
+- **Security**: proofs bind `chain_id`, `contract_address`, `nonce`; only whitelisted senders can execute.
+
+### Development Commands
+
+```bash
+bun run build        # TypeScript build
+bun run build:web   # Vite build
+bun run type-check  # tsconfig checks
+bun run preview     # Preview production build
+```
+
+### Troubleshooting
+
+| Issue | Fix |
+| ----- | --- |
+| Module not found | `bun install` |
+| Private key error | Check `.env` or allow auto-generation |
+| RPC failures | Verify `STARKNET_RPC_URL` / `wallet-config.ts` |
+| Insufficient balance | Fund the account first |
+| CORS errors | Use dev server, not `file://` |
+
+### Additional Notes
+
+- Address padding quirks: the UI automatically normalizes Starknet addresses.
+- Tongo private key differs from Starknet account key; losing it forfeits encrypted funds.
+- Manual key generation example:
+  ```bash
+  node -e "console.log('0x' + require('crypto').randomBytes(32).toString('hex'))"
+  ```
+
+For deeper protocol details, see the official [Tongo docs](https://docs.tongo.cash/).
+
+---
+
 ## License
 
 MIT License — see [LICENSE](LICENSE).
