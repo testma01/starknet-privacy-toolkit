@@ -1,6 +1,8 @@
 # Verified Donor Badge Demo (Starknet Privacy Toolkit)
 
-This repository hosts an end-to-end reference implementation of a “Verified Donor Badge” workflow built entirely on Starknet privacy tooling. It demonstrates how Noir circuits, Barretenberg proofs, Garaga-generated Cairo verifiers, and a Starknet badge contract can be composed to prove that a donor contributed ≥ a threshold without revealing the exact amount.
+This repository hosts an end-to-end reference implementation of Starknet privacy tooling. It combines two production-grade demos:
+1. A “Verified Donor Badge” flow that uses Noir circuits, Barretenberg proofs, Garaga-generated Cairo verifiers, and a Starknet badge contract to prove a donor met a threshold without revealing the amount.
+2. The Tongo private donation experience, showing how to fund, send, rollover, and withdraw encrypted balances on Starknet Mainnet (USDC) and Sepolia (STRK).
 
 > The goal of this README is to serve technical builders who want to reproduce or extend the flow—not to advertise a hackathon submission.
 
@@ -284,9 +286,9 @@ This approach keeps the repo network-agnostic—adding a mainnet deployment is j
 
 ---
 
-## Legacy: Tongo Private Donation Demo
+## Tongo Private Donation Demo
 
-The repository still contains the original **Tongo Cash** integration that inspired this work. It showcases how to fund encrypted Tongo accounts, send private donations, and withdraw, all from a Starknet web UI. The sections below document that flow for teams who want to operate both stacks side by side.
+This repository is intentionally dual-purpose: it is both a Garaga/Noir badge tutorial **and** a living walkthrough of Tongo’s private donation rails. The Tongo integration is fully supported (not legacy) and demonstrates how privacy-preserving wallets coexist with ZK attestations inside one Starknet UI.
 
 ### Feature Overview
 
