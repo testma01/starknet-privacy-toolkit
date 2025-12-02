@@ -10,13 +10,27 @@ This repository hosts an end-to-end reference implementation of a “Verified Do
 
 | Layer | Component | Purpose |
 | ----- | --------- | ------- |
+| Tongo Private Donations | `src/*.ts`, on-chain contracts in `src/wallet-config.ts` | Zero-knowledge wallet that hides STRK/USDC transfers while keeping fund/withdraw events public. Runs on Sepolia (STRK) and Mainnet (USDC). |
 | ZK Circuit | `zk-badges/donation_badge` | Noir circuit that hashes `(donation_amount, donor_secret)` with Poseidon and enforces `donation_amount >= threshold`. |
 | Proving | Barretenberg `0.67.0` | Generates Ultra Keccak Honk proofs + VK compatible with Garaga 0.15.5. |
 | Verifier | `donation_badge_verifier` | Garaga-generated verifier plus custom `DonationBadge` contract that mints tiered badges after proof validation. |
 | Backend | `api/generate-proof.ts` | Bun API that orchestrates witness creation, proving, and calldata generation. |
-| Frontend | `src/index.html` + `src/badge-service.ts` | Simple UI + TypeScript service for generating commitments, requesting proofs, and claiming the badge. |
+| Frontend | `src/index.html` + `src/badge-service.ts` | Unified UI: funding/withdrawals follow the selected Starknet network, while the badge experience is currently hard-pinned to Sepolia. |
 
-The verifier and badge contracts are currently deployed on **Starknet Sepolia**; addresses are tracked under `deployments/sepolia.json` and surfaced to the UI through `src/deployments.ts`.
+> **Important:** The badge verifier is deployed only on **Starknet Sepolia** today. The UI always connects to Sepolia for badge proofs/claims even when the network toggle is on Mainnet for Tongo operations.
+
+### Deployed Contracts
+
+| Network | Component | Address | Notes |
+| ------- | --------- | ------- | ----- |
+| **Mainnet** | Tongo Donation Contract | `0x72098b84989a45cc00697431dfba300f1f5d144ae916e98287418af4e548d96` | Accepts USDC (see token below) |
+| Mainnet | USDC Token | `0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8` | ERC20 used for funding/withdraw |
+| **Sepolia** | Tongo Donation Contract | `0x00b4cca30f0f641e01140c1c388f55641f1c3fe5515484e622b6cb91d8cee585` | Testnet STRK version |
+| Sepolia | STRK Token | `0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d` | Testnet token used in UI |
+| Sepolia | `DonationBadge` Contract | `0x077ca6f2ee4624e51ed6ea6d5ca292889ca7437a0c887bf0d63f055f42ad7010` | Mints badge tiers after proof verification |
+| Sepolia | `UltraKeccakHonkVerifier` | `0x022b20fef3764d09293c5b377bc399ae7490e60665797ec6654d478d74212669` | Garaga-generated verifier used by badge contract |
+
+Deployment metadata lives in `deployments/`, and the frontend consumes it via `src/deployments.ts`. Add a new `<network>.json` file when you deploy additional environments.
 
 ---
 
@@ -27,6 +41,7 @@ The verifier and badge contracts are currently deployed on **Starknet Sepolia**;
 - ✅ Proof verified on-chain via `sncast call`
 - ✅ Repository is structured + committed
 - ✅ README rewritten for engineers
+- ✅ Tongo + badge frontend aligned (badges hard-pinned to Sepolia)
 - ⬜ Demo video (out of scope for repo)
 - ⬜ Devpost submission (handled externally)
 
@@ -101,8 +116,8 @@ DEPLOY.md                      # Pages deploy + deployment registry policy
    ```
 
 3. **Configure Starknet credentials**
-   - `donation_badge_verifier/.secrets` contains the Sepolia RPC + account keys used in this repo.
-   - Copy values into your environment or create fresh OpenZeppelin accounts via `sncast account create …`.
+   - `donation_badge_verifier/.secrets` contains **demo-only** RPC + account values. Do **not** push real keys—use `.secrets.example` as a template and keep your local `.secrets` added to `.gitignore`.
+   - For badge declares/claims use Sepolia accounts (see `donation_badge_verifier/snfoundry.toml`). For Tongo operations you can connect mainnet wallets directly in the UI.
    - For Starkli-based flows, create a keystore and account config (see instructions in `BADGE_SETUP.md`).
 
 ---
@@ -221,7 +236,11 @@ Served via Vite:
 ```bash
 bun run dev
 ```
-The badge section displays eligibility, lets a donor trigger proof generation (via the API), and then submits the proof to Starknet using `starknet.js`. Contract addresses are fetched from `src/deployments.ts`, which reads all JSON files under `deployments/`.
+Key facts:
+- The Tongo card honors the network toggle (Mainnet = USDC, Sepolia = STRK).
+- The badge section is always visible once a wallet connects and now shows an explicit "Sepolia only" banner.
+- `badge-service.ts` instantiates a Sepolia `RpcProvider` under the hood, so badge generation/claims never touch mainnet until we deploy mainnet badge contracts.
+- Contract addresses are fetched from `src/deployments.ts`, which reads all JSON files under `deployments/`.
 
 ---
 
@@ -324,8 +343,9 @@ Requires the `.env` values mentioned above.
 
 | Network | Tongo Contract | Token | Notes |
 | ------- | -------------- | ----- | ----- |
-| Mainnet | `0x72098b84…548d96` | USDC `0x053c9125…368a8` | Matches SDK v1.3.0 |
-| Sepolia | `0x00b4cca3…ee585` | STRK `0x04718f5a…c938d` | Uses Alchemy RPC |
+| Mainnet | `0x72098b84989a45cc00697431dfba300f1f5d144ae916e98287418af4e548d96` | USDC `0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8` | Matches SDK v1.3.0 |
+| Sepolia | `0x00b4cca30f0f641e01140c1c388f55641f1c3fe5515484e622b6cb91d8cee585` | STRK `0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d` | Uses Alchemy RPC |
+| Sepolia (Badges) | `DonationBadge` `0x077ca6f2ee4624e51ed6ea6d5ca292889ca7437a0c887bf0d63f055f42ad7010` | N/A | Calls into verifier `0x022b20fef3764d09293c5b377bc399ae7490e60665797ec6654d478d74212669` |
 
 Edit `src/wallet-config.ts` for RPCs; the `.env` file affects CLI usage only.
 
