@@ -152,7 +152,7 @@ export class BadgeService {
   constructor(
     provider: RpcProvider,
     network: 'mainnet' | 'sepolia' = 'sepolia',
-    // Local proof backend (run `bun run api`)
+    // Local proof backend by default; override with Codespaces URL from UI
     proofBackendUrl: string = 'http://localhost:3001/api/generate-proof',
   ) {
     this.provider = provider;
@@ -222,6 +222,14 @@ export class BadgeService {
     if (this.initPromise) {
       await this.initPromise;
     }
+  }
+
+  /**
+   * Update the proof backend URL (useful when user changes Codespaces URL).
+   */
+  setProofBackendUrl(url: string): void {
+    this.proofBackendUrl = url;
+    console.log('[BADGE] Proof backend URL updated:', url);
   }
 
   isContractDeployed(): boolean {

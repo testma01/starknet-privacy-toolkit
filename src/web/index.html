@@ -1430,10 +1430,13 @@
                     A full-stack tutorial that combines Tongo private transfers and Garaga‑verified ZK badges.
                     Create a private balance, transfer securely, then generate a proof‑backed badge on Sepolia.
                 </p>
+                <p class="text-muted" style="margin-top: 10px;">
+                    Demo only for educational purposes. Not production‑grade or audited, even though it uses audited tooling/libraries.
+                </p>
                 <div class="hero__actions">
                     <a class="btn-primary" href="#quick-start">Start tutorial</a>
                     <a class="btn-ghost" href="#security-faq">Security FAQ</a>
-                    <a class="btn-ghost" href="https://hackmd.io/@espejelomar/ry6fLA2-bx" target="_blank" rel="noopener">Read Guide ↗</a>
+                    <a class="btn-ghost" href="https://espejel.bearblog.dev/starknet-privacy-toolkit/" target="_blank" rel="noopener">Read Guide ↗</a>
                 </div>
                 <div class="hero__meta">
                     <span>Private transfers</span>
@@ -1451,7 +1454,7 @@
         <div class="card" id="quick-start" style="margin-bottom: 24px;">
             <div class="card__header">
                 <h2>Quick Start (6 steps)</h2>
-                <p class="card__subtitle">Follow these steps in order for a smooth first run · <a href="https://hackmd.io/@espejelomar/ry6fLA2-bx" target="_blank" rel="noopener" style="color: var(--accent);">Detailed guide ↗</a></p>
+                <p class="card__subtitle">Follow these steps in order for a smooth first run · <a href="https://espejel.bearblog.dev/starknet-privacy-toolkit/" target="_blank" rel="noopener" style="color: var(--accent);">Detailed guide ↗</a></p>
             </div>
             <ul class="tutorial-steps">
                 <li class="tutorial-step">
@@ -1659,7 +1662,7 @@
             <div class="card">
                 <div class="card__header">
                     <h2>Step 3 · Fund Private Balance</h2>
-                    <p class="card__subtitle">Transfer tokens into your Tongo account · <a href="https://hackmd.io/@espejelomar/ry6fLA2-bx#3-Fund-Your-Private-Balance" target="_blank" rel="noopener" style="color: var(--accent);">Learn more ↗</a></p>
+                    <p class="card__subtitle">Transfer tokens into your Tongo account · <a href="https://espejel.bearblog.dev/starknet-privacy-toolkit/" target="_blank" rel="noopener" style="color: var(--accent);">Learn more ↗</a></p>
                 </div>
                 <p class="text-muted" style="font-size: 0.8em; margin-bottom: 15px; line-height: 1.4;">
                     Transfer tokens from your connected wallet into your Tongo account to prepare for private transfers. 
@@ -1707,7 +1710,7 @@
             <div class="card">
                 <div class="card__header">
                     <h2>Step 4 · Send Private Transfer</h2>
-                    <p class="card__subtitle">Send privately to any recipient · <a href="https://hackmd.io/@espejelomar/ry6fLA2-bx#4-Send-a-Private-Transfer" target="_blank" rel="noopener" style="color: var(--accent);">Learn more ↗</a></p>
+                    <p class="card__subtitle">Send privately to any recipient · <a href="https://espejel.bearblog.dev/starknet-privacy-toolkit/" target="_blank" rel="noopener" style="color: var(--accent);">Learn more ↗</a></p>
                 </div>
                 <p class="text-muted" style="font-size: 0.8em; margin-bottom: 15px; line-height: 1.4;">
                     Send a private transfer using a recipient's Tongo public key. The transfer amount is 
@@ -1768,7 +1771,7 @@
             <div class="card" id="badge-section" style="display: none; grid-column: 1 / -1;">
                 <div class="card__header">
                     <h2>Step 6 · ZK Badge</h2>
-                    <p class="card__subtitle">Prove your transfer tier with zero-knowledge cryptography · <a href="https://hackmd.io/@espejelomar/ry6fLA2-bx#6-Claim-a-ZK-Badge-with-Garaga" target="_blank" rel="noopener" style="color: var(--accent);">How it works ↗</a></p>
+                    <p class="card__subtitle">Prove your transfer tier with zero-knowledge cryptography · <a href="https://espejel.bearblog.dev/starknet-privacy-toolkit/" target="_blank" rel="noopener" style="color: var(--accent);">How it works ↗</a></p>
                 </div>
                 
                 <!-- Network Notice -->
@@ -1777,6 +1780,26 @@
                     <span class="text-muted">Badges run on <strong style="color: var(--text);">Sepolia testnet</strong> • Verified by <strong style="color: var(--accent);">Garaga</strong></span>
                 </div>
                 
+                <!-- Proof Backend URL Config -->
+                <div style="margin-bottom: 16px; padding: 14px; background: #1e1e2e; border-radius: 8px; border: 1px solid #3b3b5c;">
+                    <label for="proof-api-url" style="font-size: 0.95em; color: #e0e0e0; display: block; margin-bottom: 8px; font-weight: 600;">
+                        🔗 Proof API URL — paste your Codespaces URL below
+                    </label>
+                    <input 
+                        type="text" 
+                        id="proof-api-url" 
+                        placeholder="https://silver-train-xp77rg77x436j4r-3001.app.github.dev/"
+                        style="display: block; width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 6px; border: 2px solid #4f46e5; background: #0d0d14; color: #ffffff; font-size: 0.95em; margin-bottom: 10px;"
+                    />
+                    <button onclick="saveProofApiUrl()" style="width: 100%; padding: 12px 16px; font-size: 0.95em; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                        Save Proof API URL
+                    </button>
+                    <div style="font-size: 0.8em; color: #a0a0b0; margin-top: 8px;">
+                        Example: <code style="background: #0d0d14; padding: 3px 8px; border-radius: 4px; color: #7dd3fc;">https://silver-train-xyz-3001.app.github.dev/</code>
+                        <br>Get this from Codespaces → <strong>Ports</strong> tab → port 3001 → make it <strong>Public</strong> → copy URL
+                    </div>
+                </div>
+
                 <!-- Proof Backend Status -->
                 <div id="proof-backend-status" class="badge-status-inline checking">
                     <span class="status-dot"></span>
@@ -1839,13 +1862,13 @@
                     
                     <div class="form-group">
                         <label>Transfer Amount (USD)</label>
-                        <input type="number" id="badge-donation-amount" placeholder="Your actual transfer amount" min="10" step="1">
+                        <input type="number" id="badge-donation-amount" placeholder="Your actual transfer amount" min="10" step="1" value="150">
                         <small>🔒 Stays private — only used locally for proof generation</small>
                     </div>
                     
                     <div class="form-group">
                         <label>Secret Passphrase</label>
-                        <input type="password" id="badge-secret" placeholder="A memorable phrase only you know">
+                        <input type="password" id="badge-secret" placeholder="A memorable phrase only you know" value="12345678">
                         <small>🔑 Binds your identity to the badge — keep it safe!</small>
                     </div>
                     
@@ -1986,6 +2009,47 @@
         let walletAccount = null;
         let tongoPrivateKey = null;
         let badgeService = null;
+
+        // Proof API URL helpers (localStorage-backed)
+        const DEFAULT_PROOF_API_URL = 'http://localhost:3001/api/generate-proof';
+        
+        function getProofApiUrl() {
+            return localStorage.getItem('proofApiUrl') || DEFAULT_PROOF_API_URL;
+        }
+        
+        function saveProofApiUrl() {
+            const input = document.getElementById('proof-api-url');
+            if (!input) return;
+            let url = input.value.trim();
+            if (!url) {
+                url = DEFAULT_PROOF_API_URL;
+                input.value = url;
+            }
+            // Ensure it ends with /api/generate-proof
+            if (!url.endsWith('/api/generate-proof')) {
+                url = url.replace(/\/$/, '') + '/api/generate-proof';
+                input.value = url;
+            }
+            localStorage.setItem('proofApiUrl', url);
+            console.log('[BADGE] Saved proof API URL:', url);
+            // Update badgeService if already initialized
+            if (badgeService) {
+                badgeService.setProofBackendUrl(url);
+            }
+            // Re-check health with new URL
+            checkProofBackendHealth();
+        }
+        
+        function loadProofApiUrlInput() {
+            const input = document.getElementById('proof-api-url');
+            if (input) {
+                input.value = getProofApiUrl();
+            }
+        }
+
+        // Expose for inline onclick handler
+        window.saveProofApiUrl = saveProofApiUrl;
+
         // Debug helpers for console inspection
         window._debug = {
             get badgeService() { return badgeService; },
@@ -2701,6 +2765,9 @@
                 
                 // Ensure button listeners are attached
                 attachButtonListeners();
+                
+                // Load stored proof API URL into input field
+                loadProofApiUrlInput();
                 
                 // Check if auto-reconnect is disabled (for debugging)
                 const disableAutoReconnect = localStorage.getItem('tongo-disable-auto-reconnect') === 'true';
@@ -3430,7 +3497,8 @@
             
             try {
                 const sepoliaProvider = createProvider('sepolia');
-                badgeService = new BadgeService(sepoliaProvider, 'sepolia');
+                // Pass user-configured proof API URL from localStorage
+                badgeService = new BadgeService(sepoliaProvider, 'sepolia', getProofApiUrl());
                 
                 // Wait for async contract initialization (fetches ABI from chain)
                 await badgeService.ensureInitialized();
@@ -3451,8 +3519,8 @@
             const statusEl = document.getElementById('proof-backend-status');
             if (!statusEl) return;
             
-            // Local proof backend (run `bun run api`)
-            const PROOF_BACKEND_URL = 'http://localhost:3001/api/generate-proof';
+            // Use user-configured URL from localStorage
+            const PROOF_BACKEND_URL = getProofApiUrl();
             
             // Show checking state
             statusEl.className = 'badge-status-inline checking';

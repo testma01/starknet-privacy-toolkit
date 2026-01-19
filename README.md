@@ -27,9 +27,51 @@ Steps:
    ```
 3. Start the proof API:
    ```bash
+   source garaga-env/bin/activate
    bun run api
    ```
 4. Make port `3001` public if you want the web UI to call the API remotely.
+
+If the script fails, use the manual install steps below (also works locally).
+
+Troubleshooting:
+- If you see `curl: (6) Could not resolve host: noirup.dev`, use the GitHub mirror URLs shown below.
+- If it still fails, restart the Codespace and re-run (Codespaces DNS can be flaky).
+
+---
+
+## Manual installation (fallback or local)
+
+```bash
+# Noir
+curl -L https://noirup.dev | bash && source ~/.bashrc
+noirup --version 1.0.0-beta.1
+
+# Barretenberg
+curl -L https://bbup.dev | bash && source ~/.bashrc
+bbup --version 0.67.0
+sudo apt-get install -y libc++-dev libc++abi-dev
+
+# Garaga (needs Python 3.10 specifically)
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+sudo apt-get install -y python3.10 python3.10-venv python3.10-dev
+python3.10 -m venv garaga-env
+source garaga-env/bin/activate && pip install garaga==0.15.5
+
+# Bun
+curl -fsSL https://bun.sh/install | bash
+
+# Verify versions
+nargo --version  # should say 1.0.0-beta.1
+bb --version     # should say 0.67.0
+```
+
+If `noirup.dev` or `bbup.dev` fails, use these mirrors instead:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/noir-lang/noirup/main/install | bash
+curl -fsSL https://raw.githubusercontent.com/AztecProtocol/aztec-packages/master/barretenberg/bbup/install | bash
+```
 
 ---
 

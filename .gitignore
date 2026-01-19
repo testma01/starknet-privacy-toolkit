@@ -38,6 +38,7 @@ tmp/
 temp-commitment/
 zk-artifacts.zip
 zk-proof-artifacts.zip
+blog/
 .cursor/
 .cursorrules
 
